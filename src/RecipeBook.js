@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default class RecipeBook extends React.Component {
 
-    url='https://kern000-dwadrecipeapi-8y2igvhtk17.ws-us101.gitpod.io/'
+    url="https://3000-kern000-dwadrecipeapi-w4kazzgj7dv.ws-us101.gitpod.io/"
 
     state={
         'active':'listing',
@@ -98,13 +98,16 @@ export default class RecipeBook extends React.Component {
     }
 
     addNew = async () => {
+        console.log("addNew mehotd called")
         try {
-            let response=await axios.post(this.url + "recipes",
+            let response= await axios.post(this.url + "recipes",
                 {   
-                                "title": this.state.newTitle,
-                                "ingredients": this.state.newIngredients.split(",")
+                    "title": this.state.newTitle,
+                    "ingredients": this.state.newIngredients.split(",")
                 }
             )
+            console.log ("debug =>", response.data)
+            console.log("response from express => ", response)
 
             this.setState({
                 'data': [   ...this.state.data,
@@ -146,6 +149,13 @@ export default class RecipeBook extends React.Component {
 // No Access Control Origin - cannot cross origin access to gitpod
 // proxy doesn't work
 // may try localized .env file since the forked one does not have and codes rely on process.env Mongo URI which is defined inside
+
+
+// Debugging log
+// Under MongoDb network, need to allow port 0.0.0.0/0 - this will allow MongoConnection - when CORS is it usually PORT (under gitpod in this case) or the MongoDB network settings that is preventing the communication
+// Afterwards, the server side PUT is not targeting the correct part of the object (it was returning the acknowledged, true portion), so find based on _id: newIdVariable, and then return response.data[0] targeting the correct portion
+// If not the .map is broken, the 'title' is not defined, because it is not returning the right thing.
+
 
 
 

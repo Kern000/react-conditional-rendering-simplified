@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function Listing(props){
+    console.log(props.data)
     return(
         <React.Fragment>
             <h1> Recipes </h1>
