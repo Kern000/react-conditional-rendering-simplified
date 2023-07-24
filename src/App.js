@@ -5,7 +5,10 @@ import RecipeBook from './RecipeBook';
 export default function App(){
   return(
     <React.Fragment>
-      <RecipeBook/>
+      <div className="container">
+        <h2>Recipe Book</h2>
+        <RecipeBook/>
+      </div>
     </React.Fragment>
   )
 }
